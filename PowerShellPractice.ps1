@@ -69,42 +69,96 @@ Once on RemoteSigned you can run custom scripts
 
 # -------- Hastable ---------
 
+# Hastable video section - https://youtu.be/ZOoCaWyifmI?si=0HPZXlAFKHOIS2-d&t=2035
 # Specify keys and add more context
 
 #$Family = @{David = "Dad"; Steph ="Mum"; Charlotte ="Daughter"}
 # To add something to hash table
 #$Family.Add("Midnight","Cat")
 
+# -------- Collecting user input  ---------
 
-# ----- Messing around / Co-Polit Scripts ------
+# User input video section - https://youtu.be/ZOoCaWyifmI?si=wyg1SjZTQglqYw27&t=2382
+
+<#Write-Host "What is your Fav game system?"
+Write-Host "1. NES"
+Write-Host "2. Wii"
+Write-Host "3. N64"
+$FavSystem = Read-Host "Fav game system?"
+#>
+
+<#
+$PokemonCaught = "808"
+If ($PokemonCaught -eq 908) {
+    Write-Host "You're a Pokemon Master!"
+   }Else {
+    Write-Host "Go catch more Pokemon!"
+   }
+#>
+
+<#
+$PokemonNum = 200
+If($PokemonNum -ge 0 -and $PokemonNum -le  151) { #Greater than / Less than - or equal to
+    Write-Host "Your Pokemon is from Kanto!"
+} Elseif ($PokemonNum -ge 152 -and $PokemonNum -le  251){
+    Write-Host "Your Pokemon is from Johto!"
+} Elseif ($PokemonNum -ge 252 -and $PokemonNum -le  386){
+    Write-Host "Your Pokemon is from Hoenn!"
+}
+#>
+
+# -------- Switch Statement  ---------
+
+# User input video section - https://youtu.be/ZOoCaWyifmI?si=S8kK4jUq4w58iqV2&t=3168
+
+<#
+$House = "Cat"
+Switch($House) {
+    "Person" { Write-Host "Hello!": break }
+    "Cat" { Write-Host "Meow!": break }
+    "dog" { Write-Host "Woff!": break }
+}
+#>
+
+# -------- For loop  ---------
+
+# For loop video section - https://youtu.be/ZOoCaWyifmI?si=i2yMoE4Za7B2tyFP&t=3385
+
+<#
+$Pets = @('cat','dog','fish','lizard','snake')
+For($counter =0;$counter -le ($Pets.Length - 1);$counter++){
+    Write-Host "Hey, it's" $Pets[$counter]
+}
+#>
+
+# -------- For each loop  ---------
+
+# For each loop video section - https://youtu.be/ZOoCaWyifmI?si=9y9EWQ0sgXRyB5ep&t=3772
+
+<#
+$Pets = @('cat','dog','fish','lizard','snake')
+Foreach ($Pet in $Pets) {
+    Write-Host $Pet "has arrived!"
+}
+#>
+
+# -------- For while loop  ---------
+
+# For while loop video section - https://youtu.be/ZOoCaWyifmI?si=qW3DVh74GfaRl-Lb&t=3851
+
+<#
+$Office = @('Jim','Pam','Dwight','Michael')
+$counter = 0 
+While($counter -ne 4) {
+    Write-Host $Office[$counter] "is going to the Mall! " -NoNewline
+    $Office[$counter].Length
+    $counter++;
+}
+#>
+
+# ----- Messing around / Co-Pilot Scripts ------
 
 # Sort Processes by top 10 using most memory
 #Get-Process | Sort-Object WorkingSet64 -Descending | Select-Object -First 10
 
-# Clear all the broswing data in Edge
-# Get-AppXPackage -AllUsers -Name Microsoft.MicrosoftEdge | Foreach { Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml" -Verbose }
-
-# Get last shutdown time
-#$lastShutdownEvent = Get-WinEvent -LogName 'System' -MaxEvents 1 | Where-Object { $_.Id -eq 1074 }
-#$lastShutdownTime = $lastShutdownEvent.TimeCreated
-
-#Write-Host "Last Shutdown Time: $lastShutdownTime"
-
-
-# Get pending updates
-<#
-$MissingUpdates = Get-WmiObject -Class CCM_SoftwareUpdate -Filter ComplianceState=0 -Namespace root\\CCM\\ClientSDK
-$MissingUpdatesReformatted = @($MissingUpdates | ForEach-Object { if ($_.ComplianceState -eq 0) { [WMI]$_.__PATH } })
-
-if ($MissingUpdatesReformatted) {
-    # Install updates
-    $InstallReturn = Invoke-WmiMethod -ComputerName $env:computername -Class CCM_SoftwareUpdatesManager -Name InstallUpdates -ArgumentList (,$MissingUpdatesReformatted) -Namespace root\\ccm\\clientsdk
-    Write-Host "Updates found and initiated."
-} else {
-    Write-Host "No updates found."
-}
-#>
-
-
 # ----- use clear to clear the screen------
-
