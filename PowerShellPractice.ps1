@@ -156,9 +156,97 @@ While($counter -ne 4) {
 }
 #>
 
+# -------- Do while loop  ---------
+
+# Do while loop video section - https://youtu.be/ZOoCaWyifmI?si=xmRahUMhOVUpsnZU&t=4141
+
+<#
+$Office = @('Jim','Pam','Dwight','Michael')
+$counter = 0 
+Do {
+    Write-Host $Office[$counter] "Is mutant!"
+    $counter++
+} While ($counter -ne 4)
+#>
+
+# -------- Defining functions  ---------
+
+# defining a function video section - https://youtu.be/ZOoCaWyifmI?si=imriBPIfXaBKLBGk&t=4225
+<#
+function Test-SpaceX {
+    [CmdletBinding()] #turnes into adv function
+    param(
+        [Parameter(Mandatory)]
+        [int32]$PingCount
+    )
+    Test-Connection spacex.com -Count $PingCount
+}
+Test-SpaceX
+#>
+
+# -------- Error Handling  ---------
+
+# Error handling video section - https://youtu.be/ZOoCaWyifmI?si=O6Le7iJcamA52kIF&t=4621
+
+<#
+function Test-SpaceX {
+    [CmdletBinding()] #turnes into adv function
+    param(
+        [Parameter(Mandatory)]
+        [int32]$PingCount
+    )
+    Test-Connection spacex.com -Count $PingCount
+    Write-Error -Message "It's a trap!" -ErrorAction Stop
+}
+try { Test-SpaceX -ErrorAction Stop } catch { Write-Output "Launch Problem" Write-Output $_ }
+#>
+
+
+# -------- Create a file  ---------
+
+# Create a file video section - https://youtu.be/ZOoCaWyifmI?si=C-kqkb0rlKDrwR1r&t=4978
+
+
+# New-Item -path C:\Users\davidjenner\Documents\ewok.txt -type "file" -value "Praise C3PO!"
+# New-Item -Path C:\Users\davidjenner\Documents -Name "Scripts" -Type directory
+# Copy-Item C:\Users\davidjenner\Documents\ewok.txt -Destination C:\Users\davidjenner\Documents\Scripts\
+# Move-Item -Path C:\Users\davidjenner\Documents\ewok.txt -Destination ".\Scripts\"
+# Remove-Item .\ewok.txt
+# Rename-Item -Path .\Scripts -newname "My Scripts"
+
+# -------- Active Directory  ---------
+
+# Active Directory video section - https://youtu.be/ZOoCaWyifmI?si=0n4tirzwG2014De8&t=5370
+
+# Run as admin
+<#
+Import-Module ActiveDirectory
+Get-ADUser fbaggins
+
+Set variable 
+$user = Get-ADUser fbagginss
+$user.GivenName
+
+$user.GivenName | Out-File users.txt
+ls
+cat .\users.txt
+
+Set-AdUser -Indetity fbaggins -Surname Jenner
+Get-ADUser fbaggins
+-- Surname should then be jenner
+
+Add-ADGroupMember -Identity Fellowship -Members -fbaggins
+Remove-ADGroupMember -Identity Fellowship -Members -fbaggins
+
+New-ADUser -Name "Luke Skywalker" -GivenName "Luke" -Surname "Skywalker" -SamAccountName "Luke Skywalker" -UserPrincipalName "lskywalker@email.com"
+
+
+
+#>
+
 # ----- Messing around / Co-Pilot Scripts ------
 
 # Sort Processes by top 10 using most memory
-#Get-Process | Sort-Object WorkingSet64 -Descending | Select-Object -First 10
+# Get-Process | Sort-Object WorkingSet64 -Descending | Select-Object -First 10
 
 # ----- use clear to clear the screen------
